@@ -1,6 +1,7 @@
 // import { add, minus, multi } from './math'
 // import { fetchData } from './fetchData'
-import Counter from './Counter'
+// import Counter from './Counter'
+import { runCallback, classDemo } from './demo'
 // test('测试加法', () => {
 //   expect(add(5, 3)).toBe(8)
 // })
@@ -51,34 +52,50 @@ import Counter from './Counter'
 // test('测试fetchData等于404', () => {
 //   return expect(fetchData()).rejects.toThrow()
 // })
-let counter = null
-beforeAll(() => {
-  //   console.log('beforeAll')
-})
-afterAll(() => {
-  //   console.log('afterAll')
-})
-beforeEach(() => {
-  counter = new Counter()
-  //   console.log('beforeEach')
-})
-afterEach(() => {
-  //   console.log('afterEach')
-})
+
 // jest的钩子函数
 // 作用域  不要把准备工作放在describe里,要放在钩子函数里
-describe('测试加法', () => {
-  // test.only 只执行这一个测试用例
-  test('测试Counter中的addOne方法', () => {
-    console.log('测试Counter中的addOne方法')
-    counter.addOne()
-    expect(counter.number).toBe(1)
-  })
+// describe('最外层的测试方法', () => {
+//   let counter = null
+//   beforeAll(() => {
+//     console.log('beforeAll')
+//   })
+//   afterAll(() => {
+//     console.log('afterAll')
+//   })
+//   beforeEach(() => {
+//     counter = new Counter()
+//     console.log('beforeEach')
+//   })
+//   afterEach(() => {
+//     console.log('afterEach')
+//   })
+//   describe('测试加法', () => {
+//     // test.only 只执行这一个测试用例
+//     test('测试Counter中的addOne方法', () => {
+//       console.log('测试Counter中的addOne方法')
+//       counter.addOne()
+//       expect(counter.number).toBe(1)
+//     })
+//   })
+//   describe('测试减法', () => {
+//     test('测试Counter中的minusOne方法', () => {
+//       console.log('测试Counter中的minusOne方法')
+//       counter.minusOne()
+//       expect(counter.number).toBe(-1)
+//     })
+//   })
+// })
+
+// jest中的mock
+test('jest中的mock', () => {
+  const func = jest.fn()
+  func.mockReturnValue('dell')
+  runCallback(func)
+  console.log(func.mock)
 })
-describe('测试减法', () => {
-  test('测试Counter中的minusOne方法', () => {
-    console.log('测试Counter中的minusOne方法')
-    counter.minusOne()
-    expect(counter.number).toBe(-1)
-  })
+test.only('jest中的mock Class', () => {
+  const func = jest.fn()
+  classDemo(func)
+  console.log(func.mock)
 })

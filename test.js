@@ -1,7 +1,9 @@
 // import { add, minus, multi } from './math'
 // import { fetchData } from './fetchData'
 // import Counter from './Counter'
-import { runCallback, classDemo } from './demo'
+// import { runCallback, classDemo ,generateConfig, generateAnatherConfig  } from './demo'
+import { fetchData } from './demo'
+const { getNumber } = jest.requireActual('./demo.js')
 // test('测试加法', () => {
 //   expect(add(5, 3)).toBe(8)
 // })
@@ -88,14 +90,50 @@ import { runCallback, classDemo } from './demo'
 // })
 
 // jest中的mock
-test('jest中的mock', () => {
-  const func = jest.fn()
-  func.mockReturnValue('dell')
-  runCallback(func)
-  console.log(func.mock)
+// test('jest中的mock', () => {
+//   const func = jest.fn()
+//   func.mockReturnValue('dell')
+//   runCallback(func)
+//   console.log(func.mock)
+// })
+// test.only('jest中的mock Class', () => {
+//   const func = jest.fn()
+//   classDemo(func)
+//   console.log(func.mock)
+// })
+
+// test('测试快照generateConfig', () => {
+//   expect(generateConfig()).toMatchSnapshot({
+//     time: expect.any(Date),
+//   })
+// })
+// test('测试快照generateAnatherConfig', () => {
+//   expect(generateAnatherConfig()).toMatchSnapshot({
+//     time: expect.any(Date),
+//   })
+// })
+
+// test("测试快照generateAnatherConfig", () => {
+//   expect(generateAnatherConfig()).toMatchInlineSnapshot(
+//     {
+//       time: expect.any(Date)
+//     },
+//     `
+//     Object {
+//       "port": 8080,
+//       "server": "http://localhost",
+//       "time": Any<Date>,
+//     }
+//   `
+//   );
+// });
+jest.mock('./demo.js')
+// jest.unmock('./demo.js')
+test('fetchData 测试', () => {
+  return fetchData().then((data) => {
+    expect(eval(data)).toEqual(123)
+  })
 })
-test.only('jest中的mock Class', () => {
-  const func = jest.fn()
-  classDemo(func)
-  console.log(func.mock)
+test('getNumber 测试', () => {
+  expect(getNumber()).toEqual(123)
 })
